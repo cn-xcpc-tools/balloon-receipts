@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+if (isset($_SERVER['REMOTE_ADDR'])) {
+    die("Commandline use only");
+}
+
+include 'main.php';
+
