@@ -23,13 +23,11 @@ if (isset($_SERVER['REMOTE_ADDR'])) {
     die("Commandline use only");
 }
 
-require('/opt/domjudge/domserver/etc/domserver-static.php');
-
 define('SCRIPT_ID', 'balloons');
-define('LOGFILE', LOGDIR.'/balloons.log');
+define('LOGFILE', 'balloons.log');
 
-require(LIBDIR . '/lib.error.php');
-require(LIBDIR . '/lib.misc.php');
+require_once('lib/lib.error.php');
+require_once('lib/lib.misc.php');
 
 $verbose = LOG_INFO;
 

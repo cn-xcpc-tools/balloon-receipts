@@ -6,8 +6,12 @@
 $ composer install
 ```
 
-Such a piece of SQL should be executed first.
+## Running
 
-```sql
-ALTER TABLE balloon ADD COLUMN printed tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT 'Has been printed?';
+Add credentials for API to `~/.netrc` like `default login admin password adm1n`.
+
+Run the script like:
+
+```bash
+php main.php http://localhost/domjudge
 ```
