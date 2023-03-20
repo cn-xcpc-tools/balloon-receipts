@@ -31,6 +31,7 @@ require_once('lib/lib.misc.php');
 
 $verbose = LOG_INFO;
 
+define('DOMJUDGE_VERSION', '8.1.4');
 define('WAITTIME', 5);
 
 function usage() : void
@@ -210,8 +211,8 @@ while (true) {
 
             try {
                 // Enter the device file for your USB printer here
-                $connector = new FilePrintConnector("php://stdout");
-                // $connector = new FilePrintConnector("/dev/usb/lp0");
+                // $connector = new FilePrintConnector("php://stdout");
+                $connector = new FilePrintConnector("/dev/usb/lp0");
                 // $connector = new FilePrintConnector("/dev/usb/lp1");
                 // $connector = new FilePrintConnector("/dev/usb/lp2");
                 
@@ -250,7 +251,8 @@ while (true) {
             } catch (Exception $e) {
                 warning("Couldn't print error: ". $e ->getMessage() . "\n");
             } finally {
-                // request($curl_handle, $API, $API_balloons . '/' . urlencode((string)$row['balloonid']) . '/done', 'POST');
+                request($curl_handle, $API, $API_balloons . '/' . urlencode((string)$row['balloonid']) . '/done', 'POST');
+                $printer -> close();
             }
 
         }
