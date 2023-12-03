@@ -16,7 +16,7 @@
  *
  * Part of the DOMjudge Programming Contest Jury System and licensed
  * under the GNU GPL. See README and COPYING for details.
- * 
+ *
  * Modify by cubercsl.
  */
 if (isset($_SERVER['REMOTE_ADDR'])) {
@@ -58,7 +58,7 @@ require_once 'Util.php';
 function notification_text(array $contest, string $teamname, ?string $location,
     string $problem, string $color, array $probs_solved, string $comment = null) : string
 {
-    $ret =  "\n".     
+    $ret =  "\n".
         "A problem has been solved:\n".
         "\n".
         (empty($location) ? "" : "位置: ".$location."\n") .
@@ -71,7 +71,7 @@ function notification_text(array $contest, string $teamname, ?string $location,
         foreach ($probs_solved as $probid => $color) {
             $ret .= " - " . $probid . " (colour: " . convertToColor($color['rgb']) . ")\n";
         }
-    
+
         if ($comment) {
             $ret .= "\nNOTE: $comment\n";
         }
@@ -215,20 +215,20 @@ while (true) {
                 $connector = new FilePrintConnector("/dev/usb/lp0");
                 // $connector = new FilePrintConnector("/dev/usb/lp1");
                 // $connector = new FilePrintConnector("/dev/usb/lp2");
-                
+
                 $printer = new Printer($connector);
 
                 $printer ->initialize();
 
                 $printer -> setJustification(Printer::JUSTIFY_CENTER);
                 $printer -> selectPrintMode(Printer::MODE_DOUBLE_HEIGHT | Printer::MODE_DOUBLE_WIDTH);
-                
+
                 $printer -> textChinese("气球运输单\n");
                 $printer -> feed(1);
                 $printer -> textChinese("编号:".$row['balloonid']."\n");
                 $printer -> feed(1);
                 $printer -> textChinese(
-                    (empty($team['room']) ? "" : $team['room'])." ".
+                    (empty($row['location']) ? "" : $row['location'])." ".
                     convertToColor($row['contestproblem']['rgb'])."\n"
                 );
                 $printer -> feed(1);
@@ -245,9 +245,9 @@ while (true) {
                     $row['total'],
                     $row['awards']
                 ));
-                
+
                 $printer -> text("--------------------------------\n");
-                $printer -> feed(3);   
+                $printer -> feed(3);
             } catch (Exception $e) {
                 warning("Couldn't print error: ". $e ->getMessage() . "\n");
             } finally {
